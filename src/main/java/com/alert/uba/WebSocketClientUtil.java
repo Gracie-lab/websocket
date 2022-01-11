@@ -1,7 +1,7 @@
 package com.alert.uba;
 
+import com.alert.uba.stompServices.MyStompSessionHandler;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
-import org.springframework.messaging.simp.stomp.ConnectionHandlingStompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandler;
 import org.springframework.web.socket.client.WebSocketClient;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;

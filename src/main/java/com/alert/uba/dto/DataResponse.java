@@ -1,4 +1,4 @@
-package com.alert.uba;
+package com.alert.uba.dto;
 
 public class DataResponse {
 

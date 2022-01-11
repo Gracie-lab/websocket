@@ -1,5 +1,6 @@
-package com.alert.uba;
+package com.alert.uba.service;
 
+import com.alert.uba.dto.DataResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -7,7 +8,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;

@@ -1,6 +1,6 @@
-package com.alert.uba;
+package com.alert.uba.service;
 
-import org.json.JSONObject;
+import com.alert.uba.dto.DataResponse;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
