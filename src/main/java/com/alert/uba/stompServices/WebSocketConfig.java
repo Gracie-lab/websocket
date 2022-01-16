@@ -1,5 +1,7 @@
 package com.alert.uba.stompServices;
 
+import com.alert.uba.dto.DataResponse;
+import com.alert.uba.service.UbaService;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.context.annotation.Configuration;
@@ -11,31 +13,34 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
-import java.util.HashMap;
+import java.io.IOException;
 
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+    private final UbaService ubaService;
+
+    public WebSocketConfig(UbaService ubaService) {
+        this.ubaService = ubaService;
+    }
+
     @Override
     public void registerStompEndpoints(StompEndpointRegistry
                                                registry) {
-        registry.addEndpoint("/uba");
+        registry.addEndpoint("/gs-guide-websocket");
 //                .setAllowedOrigins("mydomain.com").withSockJS();
     }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config){
-        config.enableSimpleBroker("/topic/", "/queue/");
+        config.enableSimpleBroker("/fetch/");
         config.setApplicationDestinationPrefixes("/app");
     }
 
-    @MessageMapping("/news")
-    @SendTo("/topic/news")
-    public JSONObject broadcastNews(@Payload String message) throws JSONException {
-        JSONObject response = new JSONObject();
-        response.put("noOfMessagesSent", 0);
-        response.put("noOfSuccessfulMessages", 0);
-        response.put("noOfFailedMessages", 0);
-        return response;
+    @MessageMapping("/data")
+    @SendTo("/fetch/data")
+    public DataResponse broadcastNews(@Payload String message) throws JSONException, InterruptedException, IOException {
+        Thread.sleep(1000);
+        return ubaService.fetchData();
     }
 }
